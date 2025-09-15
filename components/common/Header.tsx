@@ -27,7 +27,7 @@ function Header() {
                     <li
                         key={page.link}
                         className={clsx(
-                            'px-2 py-1 rounded transition-colors text-[1.4rem] uppercase hover:text-primary duration-300',
+                            'px-2 py-1 rounded transition-colors text-[1.4rem] uppercase hover:text-primary duration-300 text-nowrap',
                             isActived ? 'font-semibold text-primary' : 'opacity-50',
                         )}
                     >
@@ -58,12 +58,12 @@ function Header() {
                         height={50}
                         className="h-[5rem] w-[5rem] rounded-full object-cover"
                     />
-                    <aside className="ml-[2rem] md:block hidden">
+                    <aside className="ml-[2rem] lg:block hidden">
                         <NavMenu />
                     </aside>
                 </div>
 
-                <div className="items-center gap-[2rem] md:flex hidden">
+                <div className="items-center gap-[2rem] lg:flex hidden">
                     <div className="flex items-center gap-[1rem]">
                         <CirclePoundSterling className="w-8 h-8" />
                         <span className="text-[1.4rem]">9,999</span>
@@ -76,13 +76,13 @@ function Header() {
                     <ThemeToggle />
                     <Link
                         href={`/${paths.login}`}
-                        className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border"
+                        className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border text-nowrap"
                     >
                         Bắt đầu
                     </Link>
                 </div>
 
-                <div className="md:hidden block">
+                <div className="lg:hidden block">
                     <Button aria-label="Open Menu" onClick={showDrawer}>
                         <List />
                     </Button>

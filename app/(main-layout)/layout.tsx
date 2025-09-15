@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import '../globals.css';
 import Header from '@/components/common/Header';
 import { Providers } from '@/components/common/Providers';
-
+import Footer from '@/components/common/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -17,7 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={inter.className}>
                 <Providers>
                     <Header />
-                    <main className="pt-[9rem] bg-content-bg min-h-screen"> {children}</main>
+                    <main className="pt-[7rem] bg-content-bg min-h-screen"> {children}</main>
+                    <Footer />
                 </Providers>
             </body>
         </html>

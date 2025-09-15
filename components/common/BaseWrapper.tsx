@@ -1,10 +1,12 @@
+import clsx from 'clsx';
 import { ReactNode } from 'react';
 
 interface BaseWrapperProps {
     children: ReactNode;
+    className?: string;
 }
-function BaseWrapper({ children }: BaseWrapperProps) {
-    return <div className="max-w-[144rem] mx-auto p-[1rem]">{children}</div>;
+function BaseWrapper({ children, className }: BaseWrapperProps) {
+    return <div className={clsx('max-w-[144rem] mx-auto p-[1rem]', className)}>{children}</div>;
 }
 
 export default BaseWrapper;
