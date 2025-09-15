@@ -2,3 +2,29 @@
 @import '../styles/styles.scss';
 
 @variant dark (&:where(.dark, .dark *));
+
+html {
+    font-size: 10px;
+}
+
+@theme {
+    --color-foreground: #111827;
+    --color-background: #f9fafb;
+    --color-tag: #ccc;
+    --color-primary: #006d3b;
+    --color-border: #e5e7eb;
+    --color-header-bg: #ffffff;
+    --color-footer-bg: #f3f4f6;
+    --color-content-bg: #ffffff;
+}
+
+.dark {
+    --color-foreground: #e2e8f0;
+    --color-background: #141414;
+    --color-tag: #2e2e2e;
+    --color-header-bg: #030507;
+    --color-footer-bg: #030507;
+    --color-content-bg: #030507;
+    --color-primary: #dcca87;
+    --color-border: #dcca87;
+}

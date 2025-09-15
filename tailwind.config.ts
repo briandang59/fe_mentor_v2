@@ -9,17 +9,14 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                primary: {
-                    50: '#eff6ff',
-                    500: '#3b82f6',
-                    900: '#1e3a8a',
-                },
-                // Thêm custom colors khác
+                primary: 'var(--color-primary)',
+                background: 'var(--color-background)',
+                foreground: 'var(--color-foreground)',
+                border: 'var(--color-border)',
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
             },
-            // Custom spacing, breakpoints, etc.
         },
     },
     plugins: [],
