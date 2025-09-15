@@ -15,7 +15,12 @@ export const pages = [
         children: [],
     },
     {
-        label: 'Phòng học',
+        label: 'Tin nhắn',
+        link: '/messages',
+        children: [],
+    },
+    {
+        label: 'Phòng',
         link: '/rooms',
         children: [],
     },
