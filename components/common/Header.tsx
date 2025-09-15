@@ -7,8 +7,8 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
-import { List } from 'lucide-react';
-import { Button, Drawer } from 'antd';
+import { Bell, CirclePoundSterling, List } from 'lucide-react';
+import { Badge, Button, Drawer } from 'antd';
 import { useState, useCallback } from 'react';
 import { paths } from '@/utils/constants/paths';
 
@@ -31,7 +31,9 @@ function Header() {
                             isActived ? 'font-semibold text-primary' : 'opacity-50',
                         )}
                     >
-                        <Link href={page.link}>{page.label}</Link>
+                        <Link href={page.link} className="!text-primary">
+                            {page.label}
+                        </Link>
                     </li>
                 );
             })}
@@ -61,7 +63,16 @@ function Header() {
                     </aside>
                 </div>
 
-                <div className="items-center gap-4 md:flex hidden">
+                <div className="items-center gap-[2rem] md:flex hidden">
+                    <div className="flex items-center gap-[1rem]">
+                        <CirclePoundSterling className="w-8 h-8" />
+                        <span className="text-[1.4rem]">9,999</span>
+                    </div>
+                    <button className="cursor-pointer">
+                        <Badge count={5} size="small">
+                            <Bell className="w-8 h-8" />
+                        </Badge>
+                    </button>
                     <ThemeToggle />
                     <Link
                         href={`/${paths.login}`}

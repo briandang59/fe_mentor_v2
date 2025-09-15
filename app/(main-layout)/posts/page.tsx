@@ -1,7 +1,13 @@
+'use client';
 import BaseWrapper from '@/components/common/BaseWrapper';
+import { FilterSidebar } from '@/components/common/FilterSidebar';
 import PostItem from '@/components/common/PostItem';
+import { Checkbox, CheckboxProps, Drawer, Tabs, TabsProps } from 'antd';
+import { Filter, Search } from 'lucide-react';
+import { useState } from 'react';
 
 function Posts() {
+    const [openFilter, setOpenFilter] = useState(false);
     const posts = [
         {
             id: 1,
@@ -110,17 +116,79 @@ function Posts() {
         },
     ];
 
-    return (
-        <BaseWrapper>
-            <div className="grid md:grid-cols-2 lg:grid-cols-[30%_70%] gap-4">
-                <div className="p-4 max-h-[500px] shadow-md rounded-[10px] sticky top-[90px] bg-background">
-                    <p className="text-[2rem] font-bold">Bộ lọc</p>
-                </div>
+    const tags = [
+        {
+            id: 5,
+            tag_name: 'API',
+            created_at: '2025-09-15T05:02:07.948186Z',
+            updated_at: '2025-09-15T05:02:07.948186Z',
+        },
+        {
+            id: 6,
+            tag_name: 'CI/CD',
+            created_at: '2025-09-15T05:02:07.948186Z',
+            updated_at: '2025-09-15T05:02:07.948186Z',
+        },
+        {
+            id: 7,
+            tag_name: 'Github',
+            created_at: '2025-09-15T05:02:07.948186Z',
+            updated_at: '2025-09-15T05:02:07.948186Z',
+        },
+    ];
+    const onClear = () => {
+        console.log('Clear filters');
+    };
+    const onChangeTab = (key: string) => {
+        console.log(key);
+    };
+    const onChangeTag: CheckboxProps['onChange'] = (e) => {
+        console.log(`checked = ${e.target.checked}`);
+    };
+    const items: TabsProps['items'] = [
+        {
+            key: '1',
+            label: 'Tất cả bài viết',
+            children: (
                 <div className="grid grid-cols-1 gap-[1rem]">
                     {posts.map((p) => (
                         <PostItem key={p.id} record={p} />
                     ))}
                 </div>
+            ),
+        },
+        {
+            key: '2',
+            label: 'Bài viết đã lưu',
+            children: 'Content of Tab Pane 2',
+        },
+    ];
+
+    return (
+        <BaseWrapper>
+            <div className="grid md:grid-cols-2 lg:grid-cols-[30%_70%] gap-4">
+                <div className="hidden md:block sticky top-[9rem]">
+                    <FilterSidebar tags={tags} onChangeTag={onChangeTag} onClear={onClear} />
+                </div>
+
+                <div className="flex md:hidden justify-end mb-4">
+                    <button
+                        className="flex items-center gap-2 text-primary text-[1.4rem]"
+                        onClick={() => setOpenFilter(true)}
+                    >
+                        <Filter className="w-6 h-6" /> Bộ lọc
+                    </button>
+                </div>
+
+                <Drawer
+                    title="Bộ lọc"
+                    placement="left"
+                    onClose={() => setOpenFilter(false)}
+                    open={openFilter}
+                >
+                    <FilterSidebar tags={tags} onChangeTag={onChangeTag} onClear={onClear} />
+                </Drawer>
+                <Tabs defaultActiveKey="1" items={items} onChange={onChangeTab} />
             </div>
         </BaseWrapper>
     );
