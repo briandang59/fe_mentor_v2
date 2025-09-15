@@ -2,8 +2,8 @@
 import BaseWrapper from '@/components/common/BaseWrapper';
 import { FilterSidebar } from '@/components/common/FilterSidebar';
 import PostItem from '@/components/common/PostItem';
-import { Checkbox, CheckboxProps, Drawer, Tabs, TabsProps } from 'antd';
-import { Filter, Search } from 'lucide-react';
+import { CheckboxProps, Drawer, Tabs, TabsProps } from 'antd';
+import { Filter } from 'lucide-react';
 import { useState } from 'react';
 
 function Posts() {
