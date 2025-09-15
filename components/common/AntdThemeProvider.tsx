@@ -18,7 +18,7 @@ export function AntdThemeProvider({ children }: { children: React.ReactNode }) {
             theme={{
                 algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
                 token: {
-                    colorPrimary: '#dcca87',
+                    colorPrimary: isDark ? '#dcca87' : '#006d3b',
                     borderRadius: 8,
                 },
             }}

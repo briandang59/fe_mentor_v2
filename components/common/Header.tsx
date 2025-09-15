@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
 import { List } from 'lucide-react';
-import { Drawer } from 'antd';
+import { Button, Drawer } from 'antd';
 import { useState, useCallback } from 'react';
 import { paths } from '@/utils/constants/paths';
 
@@ -65,20 +65,17 @@ function Header() {
                     <ThemeToggle />
                     <Link
                         href={`/${paths.login}`}
-                        className="bg-tag p-[1rem] rounded-[1rem] text-[1.2rem] cursor-pointer hover:opacity-90 duration-300"
+                        className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border"
                     >
                         Bắt đầu
                     </Link>
                 </div>
 
-                <button
-                    aria-label="Open Menu"
-                    className="md:hidden block cursor-pointer"
-                    onClick={showDrawer}
-                >
-                    <List />
-                </button>
-
+                <div className="md:hidden block">
+                    <Button aria-label="Open Menu" onClick={showDrawer}>
+                        <List />
+                    </Button>
+                </div>
                 <Drawer
                     title={<span className="text-[1.6rem] font-semibold">Menu</span>}
                     onClose={onClose}
