@@ -1,0 +1,29 @@
+'use client';
+
+import { ConfigProvider, theme as antdTheme } from 'antd';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+
+export function AntdThemeProvider({ children }: { children: React.ReactNode }) {
+    const { theme, systemTheme } = useTheme();
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(() => {
+        const currentTheme = theme === 'system' ? systemTheme : theme;
+        setIsDark(currentTheme === 'dark');
+    }, [theme, systemTheme]);
+
+    return (
+        <ConfigProvider
+            theme={{
+                algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+                token: {
+                    colorPrimary: '#dcca87',
+                    borderRadius: 8,
+                },
+            }}
+        >
+            {children}
+        </ConfigProvider>
+    );
+}

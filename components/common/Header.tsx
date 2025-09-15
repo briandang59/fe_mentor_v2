@@ -10,6 +10,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { List } from 'lucide-react';
 import { Drawer } from 'antd';
 import { useState, useCallback } from 'react';
+import { paths } from '@/utils/constants/paths';
 
 function Header() {
     const pathname = usePathname();
@@ -62,6 +63,12 @@ function Header() {
 
                 <div className="items-center gap-4 md:flex hidden">
                     <ThemeToggle />
+                    <Link
+                        href={`/${paths.login}`}
+                        className="bg-tag p-[1rem] rounded-[1rem] text-[1.2rem] cursor-pointer hover:opacity-90 duration-300"
+                    >
+                        Bắt đầu
+                    </Link>
                 </div>
 
                 <button
