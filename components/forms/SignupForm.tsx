@@ -3,7 +3,6 @@ import { Form, Button } from 'antd';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormInput } from '../formsComponent';
-import Link from 'next/link';
 import { SignupFormValue, signupSchema } from '@/utils/schemas/signup';
 
 function SignUpForm() {
