@@ -3,7 +3,7 @@ import { Github, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 function Footer() {
     return (
-        <footer className="text-[var(--color-foreground)]">
+        <footer className="text-[var(--color-foreground)] border-t border-t-border">
             <div className="max-w-[144rem] mx-auto px-4 py-8 grid md:grid-cols-3 gap-8">
                 <div className="flex flex-col gap-4">
                     <h2 className="text-[1.8rem] font-bold text-primary">Mentor Hub</h2>
