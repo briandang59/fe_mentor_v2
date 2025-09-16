@@ -1,5 +1,5 @@
 function Contract() {
-    return <div>contract</div>;
+    return <div>contract test deploy</div>;
 }
 
 export default Contract;
