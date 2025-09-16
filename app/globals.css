@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 @import '../styles/styles.scss';
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
 
 @variant dark (&:where(.dark, .dark *));
 

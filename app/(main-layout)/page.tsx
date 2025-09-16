@@ -2,10 +2,14 @@ import { images } from '@/assets/images';
 import BaseWrapper from '@/components/common/BaseWrapper';
 import { Button, Divider } from 'antd';
 import Image from 'next/image';
+import BannerSwiper from '@/components/common/BannerSwiper';
 
 export default function Home() {
     return (
         <div>
+            <div className="lg:min-h-[80rem]">
+                <BannerSwiper />
+            </div>
             <BaseWrapper className="flex flex-col gap-[4rem]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[1rem] md:gap-[6rem] min-h-[60rem] md:min-h-[60rem] md:py-[10rem]">
                     <div className="flex items-center justify-center">
