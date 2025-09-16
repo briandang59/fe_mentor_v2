@@ -17,11 +17,35 @@ export default function BannerSwiper() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const slides = [
-        { image: images.banner1, text: 'Đến với Mentor Hub, trở thành Mentor' },
-        { image: images.banner2, text: 'Học hỏi, chia sẻ kiến thức mỗi ngày' },
-        { image: images.banner3, text: 'Xây dựng cộng đồng cùng nhau phát triển' },
-        { image: images.banner4, text: 'Nơi hội tụ Mentor chất lượng' },
-        { image: images.banner6, text: 'Khám phá tri thức, mở rộng tầm nhìn' },
+        {
+            image: images.banner1,
+            title: 'Đến với Mentor Hub, trở thành Mentor',
+            description:
+                'Tham gia cộng đồng để chia sẻ kinh nghiệm và hướng dẫn người khác đạt được mục tiêu.',
+        },
+        {
+            image: images.banner2,
+            title: 'Học hỏi, chia sẻ kiến thức mỗi ngày',
+            description:
+                'Mỗi ngày là cơ hội để khám phá kiến thức mới và kết nối với các mentor hàng đầu.',
+        },
+        {
+            image: images.banner3,
+            title: 'Xây dựng cộng đồng cùng nhau phát triển',
+            description:
+                'Hợp tác để tạo nên một môi trường hỗ trợ, nơi mọi người cùng tiến bộ và thành công.',
+        },
+        {
+            image: images.banner4,
+            title: 'Nơi hội tụ Mentor chất lượng',
+            description:
+                'Gặp gỡ các chuyên gia đáng tin cậy từ nhiều lĩnh vực, sẵn sàng hỗ trợ bạn.',
+        },
+        {
+            image: images.banner6,
+            title: 'Khám phá tri thức, mở rộng tầm nhìn',
+            description: 'Mở ra những chân trời mới với kiến thức sâu rộng và góc nhìn đa dạng.',
+        },
     ];
 
     return (
@@ -37,7 +61,6 @@ export default function BannerSwiper() {
                 autoplay={{
                     delay: 7000,
                     disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
                 }}
                 onAutoplayTimeLeft={(_, __, progressRatio) => {
                     setProgress(1 - progressRatio);
@@ -62,13 +85,16 @@ export default function BannerSwiper() {
                         <div className="absolute inset-0 flex items-center justify-center">
                             <motion.div
                                 key={activeIndex}
-                                initial={{ y: -40, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
+                                initial={{ y: -40, opacity: 0, scale: 0.95 }}
+                                animate={{ y: 0, opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                                className="bg-black/50 backdrop-blur-md rounded-xl px-6 py-4 max-w-[90%] text-center"
+                                className="bg-gradient-to-b from-black/60 to-black/40 backdrop-blur-lg rounded-2xl px-6 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 max-w-[85%] text-center shadow-xl"
                             >
-                                <p className="text-white text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold leading-snug">
-                                    {slide.text}
+                                <p className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-wide uppercase drop-shadow-2xl text-primary">
+                                    {slide.title}
+                                </p>
+                                <p className="text-white/80 text-sm sm:text-base md:text-lg lg:text-xl font-medium mt-2 sm:mt-3 md:mt-4 leading-relaxed max-w-prose mx-auto">
+                                    {slide.description}
                                 </p>
                             </motion.div>
                         </div>
