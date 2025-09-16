@@ -9,15 +9,36 @@ import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
 import { Bell, CirclePoundSterling, List } from 'lucide-react';
 import { Badge, Button, Drawer } from 'antd';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { paths } from '@/utils/constants/paths';
 
 function Header() {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
+    const [hidden, setHidden] = useState(false);
+    const lastScrollY = useRef(0);
 
     const showDrawer = useCallback(() => setOpen(true), []);
     const onClose = useCallback(() => setOpen(false), []);
+
+    // Theo dõi scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Nếu cuộn xuống và đã vượt quá 80px thì ẩn header
+            if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+                setHidden(true);
+            } else {
+                setHidden(false);
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const NavMenu = ({ isVertical = false }: { isVertical?: boolean }) => (
         <ul className={clsx('gap-4', isVertical ? 'flex flex-col' : 'flex items-center')}>
@@ -42,12 +63,13 @@ function Header() {
 
     return (
         <header
-            className="
-        min-h-[6rem] py-[1rem] fixed top-0 left-0 right-0 z-50
-        bg-[var(--color-header-bg)] text-[var(--color-foreground)]
-        shadow-md backdrop-blur-sm bg-opacity-70 dark:bg-opacity-50
-        px-[1rem]
-      "
+            className={clsx(
+                `min-h-[6rem] py-[1rem] fixed top-0 left-0 right-0 z-50
+                bg-[var(--color-header-bg)] text-[var(--color-foreground)]
+                shadow-md backdrop-blur-sm bg-opacity-70 dark:bg-opacity-50
+                px-[1rem] transition-transform duration-300`,
+                hidden ? '-translate-y-full' : 'translate-y-0',
+            )}
         >
             <div className="max-w-[144rem] flex items-center justify-between mx-auto">
                 <div className="flex items-center gap-4">

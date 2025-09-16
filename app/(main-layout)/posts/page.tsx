@@ -166,8 +166,8 @@ function Posts() {
 
     return (
         <BaseWrapper>
-            <div className="grid md:grid-cols-2 lg:grid-cols-[30%_70%] gap-4">
-                <div className="hidden md:block sticky top-[9rem]">
+            <div className="grid md:grid-cols-2 lg:grid-cols-[30%_70%] gap-4 items-start">
+                <div className="hidden md:block sticky top-[2rem]">
                     <FilterSidebar tags={tags} onChangeTag={onChangeTag} onClear={onClear} />
                 </div>
 
