@@ -2,25 +2,24 @@
 import { Form, Button } from 'antd';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginFormValues, loginSchema } from '@/utils/schemas/login';
 import { FormInput } from '../formsComponent';
 import Link from 'next/link';
-import { paths } from '@/utils/constants/paths';
+import { SignupFormValue, signupSchema } from '@/utils/schemas/signup';
 
-function LoginForm() {
+function SignUpForm() {
     const {
         control,
         handleSubmit,
         formState: { errors, isSubmitting },
-    } = useForm<LoginFormValues>({
-        resolver: yupResolver(loginSchema),
+    } = useForm<SignupFormValue>({
+        resolver: yupResolver(signupSchema),
         defaultValues: {
             email: '',
             password: '',
         },
     });
 
-    const onSubmit = async (data: LoginFormValues) => {
+    const onSubmit = async (data: SignupFormValue) => {
         console.log('✅ Dữ liệu hợp lệ:', data);
     };
 
@@ -36,6 +35,14 @@ function LoginForm() {
             />
             <FormInput
                 control={control}
+                name="username"
+                label="Tên đăng nhập"
+                placeholder="Nhập email"
+                size="large"
+                error={errors.email?.message}
+            />
+            <FormInput
+                control={control}
                 name="password"
                 label="Mật khẩu"
                 type="password"
@@ -43,11 +50,15 @@ function LoginForm() {
                 size="large"
                 error={errors.password?.message}
             />
-            <div className="flex items-center justify-end mb-[2rem]">
-                <Link href={`${paths.forgot_password}`} className="!text-primary">
-                    Quên mật khẩu?
-                </Link>
-            </div>
+            <FormInput
+                control={control}
+                name="re_password"
+                label="Nhập lại mật khẩu"
+                type="password"
+                placeholder="Nhập mật khẩu"
+                size="large"
+                error={errors.password?.message}
+            />
 
             <Button
                 htmlType="submit"
@@ -62,4 +73,4 @@ function LoginForm() {
     );
 }
 
-export default LoginForm;
+export default SignUpForm;

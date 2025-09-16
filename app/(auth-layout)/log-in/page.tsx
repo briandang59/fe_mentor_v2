@@ -1,6 +1,7 @@
 import { images } from '@/assets/images';
 import BaseWrapper from '@/components/common/BaseWrapper';
 import LoginForm from '@/components/forms/LoginForm';
+import { paths } from '@/utils/constants/paths';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,7 +17,7 @@ function Login() {
                         <LoginForm />
                         <p className="text-center text-[1.4rem] mt-[1rem]">
                             Chưa có tài khoản?{' '}
-                            <Link href={`/`} className="text-primary">
+                            <Link href={`/${paths.signup}`} className="text-primary">
                                 Tạo tài khoản ngay
                             </Link>
                         </p>

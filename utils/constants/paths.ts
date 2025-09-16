@@ -1,5 +1,7 @@
 export const paths = {
     home: '/',
     posts: 'posts',
-    login: 'login',
+    login: 'log-in',
+    signup: 'sign-up',
+    forgot_password: 'forgot-password',
 };
