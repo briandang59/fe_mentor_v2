@@ -1,0 +1,24 @@
+name: Next Deployment
+
+on:
+  push:
+    branches: [production]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /root/apps/fe_mentor_v2
+            git fetch origin
+            git checkout production
+            git pull
+            docker compose down
+            docker compose up -d --build
