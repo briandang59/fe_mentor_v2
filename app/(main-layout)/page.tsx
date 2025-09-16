@@ -16,10 +16,10 @@ export default function Home() {
     ];
 
     const thumbnails = [
-        { src: images.thumbnailLogin, alt: 'Mentor Session', label: 'Học hỏi từ chuyên gia' },
-        { src: images.thumbnailLogin, alt: 'Community Event', label: 'Sự kiện cộng đồng' },
-        { src: images.thumbnailLogin, alt: 'Online Meeting', label: 'Cuộc họp trực tuyến' },
-        { src: images.thumbnailLogin, alt: 'Success Story', label: 'Câu chuyện thành công' },
+        { src: images.banner1, alt: 'Mentor Session', label: 'Học hỏi từ chuyên gia' },
+        { src: images.banner2, alt: 'Community Event', label: 'Sự kiện cộng đồng' },
+        { src: images.banner6, alt: 'Online Meeting', label: 'Cuộc họp trực tuyến' },
+        { src: images.banner4, alt: 'Success Story', label: 'Câu chuyện thành công' },
     ];
 
     function CountUp({ value, delay = 0 }: { value: string; delay?: number }) {
