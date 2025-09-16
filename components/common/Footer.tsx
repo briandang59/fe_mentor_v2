@@ -7,11 +7,11 @@ function Footer() {
             <div className="max-w-[144rem] mx-auto px-4 py-8 grid md:grid-cols-3 gap-8">
                 <div className="flex flex-col gap-4">
                     <h2 className="text-[1.8rem] font-bold text-primary">Mentor Hub</h2>
-                    <p className="text-[1.4rem] opacity-80">
+                    <p className="text-[1.4rem] opacity-80 text-justify md:max-w-[30rem]">
                         Một trang web nơi các chuyên gia Công nghệ thông tin có thể tìm thấy người
                         cố vấn
                     </p>
-                    <p className="text-[1.4rem] opacity-80">
+                    <p className="text-[1.4rem] opacity-80 text-justify md:max-w-[30rem]">
                         Mục tiêu của chúng tôi là cung cấp cho những người được cố vấn cơ hội phát
                         triển và học hỏi từ những cá nhân dày dạn kinh nghiệm, thúc đẩy sự phát
                         triển cả về chuyên môn và cá nhân của họ. trong lĩnh vực thực hiện tiềm

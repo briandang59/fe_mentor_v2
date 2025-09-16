@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div>
             <BaseWrapper className="flex flex-col gap-[4rem]">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-[1rem] md:gap-[6rem] min-h-[60rem] md:min-h-[60rem] py-[10rem]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[1rem] md:gap-[6rem] min-h-[60rem] md:min-h-[60rem] md:py-[10rem]">
                     <div className="flex items-center justify-center">
                         <div className="grid grid-cols-2 gap-[2rem] h-fit">
                             <Image
@@ -78,7 +78,7 @@ export default function Home() {
             </BaseWrapper>
             <Divider />
             <BaseWrapper>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-[1rem] md:gap-[6rem] min-h-[60rem] md:min-h-[60rem] py-[10rem]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[1rem] md:gap-[6rem] min-h-[60rem] md:min-h-[60rem] md:py-[10rem]">
                     <div>
                         <h2 className="text-[2.4rem] md:text-[4.4rem] font-bold">Giới thiệu về</h2>
                         <h2 className="text-[2.4rem] md:text-[4.4rem] text-primary font-bold">
@@ -93,13 +93,15 @@ export default function Home() {
                             ngành đầy hứa hẹn này.
                         </p>
                     </div>
-                    <Image
-                        src={images.thumbnailLogin}
-                        alt="thumb"
-                        width={1000}
-                        height={1000}
-                        className="rounded-[1rem]"
-                    />
+                    <div className="flex items-center justify-center">
+                        <Image
+                            src={images.thumbnailLogin}
+                            alt="thumb"
+                            width={1000}
+                            height={1000}
+                            className="rounded-[1rem]"
+                        />
+                    </div>
                 </div>
             </BaseWrapper>
             <Divider />
