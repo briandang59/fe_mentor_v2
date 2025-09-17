@@ -12,7 +12,7 @@ html {
 
 @theme {
     --color-foreground: #111827;
-    --color-background: #f9fafb;
+    --color-background: #e2e8f0;
     --color-tag: #ccc;
     --color-primary: #006d3b;
     --color-border: #006d3b;
@@ -23,7 +23,7 @@ html {
 
 .dark {
     --color-foreground: #e2e8f0;
-    --color-background: #141414;
+    --color-background: #111111;
     --color-tag: #272727;
     --color-header-bg: #030507;
     --color-footer-bg: #030507;
