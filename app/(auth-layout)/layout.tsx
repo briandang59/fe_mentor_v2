@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../globals.css';
 import { Providers } from '@/components/common/Providers';
+import ToastProvider from '@/components/common/ToastProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,6 +17,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             <body className={inter.className}>
                 <Providers>
                     <main className="bg-content-bg min-h-screen"> {children}</main>
+                    <ToastProvider />
                 </Providers>
             </body>
         </html>
