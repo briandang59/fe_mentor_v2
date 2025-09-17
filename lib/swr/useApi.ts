@@ -1,17 +1,15 @@
 'use client';
 
-import useSWR, { SWRConfiguration } from 'swr';
+import useSWR, { SWRConfiguration, SWRResponse } from 'swr';
 import { fetchData } from '../fetcher';
 
-export function useApi<T = any>(
+export function useApi<TResponse = unknown>(
     key: string | null,
-    options?: SWRConfiguration & { requireAuth?: boolean },
-) {
-    return useSWR<T>(
+    options?: SWRConfiguration<TResponse> & { requireAuth?: boolean },
+): SWRResponse<TResponse> {
+    return useSWR<TResponse>(
         key,
-        key ? (url) => fetchData<T>(url, { requireAuth: options?.requireAuth }) : null,
-        {
-            ...options,
-        },
+        key ? (url) => fetchData<TResponse>(url, { requireAuth: options?.requireAuth }) : null,
+        options,
     );
 }
