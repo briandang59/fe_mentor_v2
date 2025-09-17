@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 function Login() {
+    //trigger
     return (
         <BaseWrapper>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-[2rem] h-screen items-center justify-center">
