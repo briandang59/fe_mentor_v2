@@ -53,7 +53,7 @@ function Header() {
                             isActived ? 'font-semibold text-primary' : 'opacity-50',
                         )}
                     >
-                        <Link href={page.link}>{page.label}</Link>
+                        <Link href={page.link} className='!text-inherit'>{page.label}</Link>
                     </li>
                 );
             })}
@@ -139,7 +139,7 @@ function Header() {
                         </button>
                     </div>
 
-                    <div className="mt-[2rem]">
+                    <div className="mt-[2rem] flex flex-col gap-[1rem] w-fit">
                         <ThemeToggle />
                         <LanguageToggle />
                     </div>
