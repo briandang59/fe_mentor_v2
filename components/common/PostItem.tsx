@@ -14,7 +14,7 @@ function PostItem({ record }: PostItemProps) {
             href={`/${paths.posts}/${record.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-[2rem] rounded-[1rem] shadow-md min-h-[200px] flex flex-col gap-4 cursor-pointer bg-background border border-border"
+            className="p-[2rem] rounded-[1rem] shadow-md min-h-[200px] flex flex-col gap-4 cursor-pointer dark:!bg-background border border-gray-300 dark:border-transparent"
         >
             <div className="flex items-center justify-between gap-[1rem]">
                 <span className="text-foreground text-[1.2rem]">
