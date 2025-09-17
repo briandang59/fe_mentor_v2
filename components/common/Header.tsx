@@ -1,16 +1,18 @@
 'use client';
 
-import { pages } from '@/utils/constants/page';
+import { usePages } from '@/utils/constants/page';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
-import { Bell, CirclePoundSterling, List } from 'lucide-react';
+import { Bell, List } from 'lucide-react';
 import { Badge, Drawer } from 'antd';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { paths } from '@/utils/constants/paths';
+import { useTranslations } from 'next-intl';
+import { LanguageToggle } from './LanguageToggle';
 
 function Header() {
     const router = useRouter();
@@ -18,9 +20,11 @@ function Header() {
     const [open, setOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
     const lastScrollY = useRef(0);
+    const pages = usePages();
 
     const showDrawer = useCallback(() => setOpen(true), []);
     const onClose = useCallback(() => setOpen(false), []);
+    const t = useTranslations();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -81,27 +85,24 @@ function Header() {
                 </div>
 
                 <div className="items-center gap-[1rem] lg:flex hidden">
-                    <div className="flex items-center gap-[1rem]">
-                        <CirclePoundSterling className="w-8 h-8" />
-                        <span className="text-[1.4rem]">9,999</span>
-                    </div>
                     <button className="cursor-pointer">
                         <Badge count={5} size="small">
                             <Bell className="w-8 h-8" />
                         </Badge>
                     </button>
                     <ThemeToggle />
+                    <LanguageToggle />
                     <Link
                         href={paths.login}
                         className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border text-nowrap"
                     >
-                        Đăng nhập
+                        {t('header.login')}
                     </Link>
                     <Link
                         href={paths.signup}
                         className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-white bg-primary font-semibold text-nowrap"
                     >
-                        Đăng ký
+                        {t('header.signup')}
                     </Link>
                 </div>
 
@@ -111,11 +112,7 @@ function Header() {
                     </button>
                 </div>
 
-                <Drawer
-                    title={<span className="text-[1.6rem] font-semibold">Menu</span>}
-                    onClose={onClose}
-                    open={open}
-                >
+                <Drawer title={''} onClose={onClose} open={open}>
                     <aside className="mb-[2rem]">
                         <NavMenu isVertical />
                     </aside>
@@ -128,7 +125,7 @@ function Header() {
                             }}
                             className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] border border-border font-semibold hover:opacity-90 transition text-primary"
                         >
-                            Đăng nhập
+                            {t('header.login')}
                         </button>
 
                         <button
@@ -138,12 +135,13 @@ function Header() {
                             }}
                             className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] bg-primary text-white font-semibold hover:opacity-90 transition"
                         >
-                            Đăng ký
+                            {t('header.signup')}
                         </button>
                     </div>
 
                     <div className="mt-[2rem]">
                         <ThemeToggle />
+                        <LanguageToggle />
                     </div>
                 </Drawer>
             </div>
