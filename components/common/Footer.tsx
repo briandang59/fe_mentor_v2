@@ -1,44 +1,38 @@
+'use client';
 import Link from 'next/link';
 import { Github, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { usePages } from '@/utils/constants/page';
+import { useTranslations } from 'next-intl';
 
 function Footer() {
+    const t = useTranslations();
+    const pages = usePages();
     return (
         <footer className="text-[var(--color-foreground)] border-t border-t-border dark:border-transparent">
             <div className="max-w-[144rem] mx-auto px-4 py-8 grid md:grid-cols-3 gap-8">
                 <div className="flex flex-col gap-4">
                     <h2 className="text-[1.8rem] font-bold text-primary">Mentor Hub</h2>
                     <p className="text-[1.4rem] opacity-80 text-justify md:max-w-[30rem]">
-                        Một trang web nơi các chuyên gia Công nghệ thông tin có thể tìm thấy người
-                        cố vấn
+                        {t('footer.description1')}
                     </p>
                     <p className="text-[1.4rem] opacity-80 text-justify md:max-w-[30rem]">
-                        Mục tiêu của chúng tôi là cung cấp cho những người được cố vấn cơ hội phát
-                        triển và học hỏi từ những cá nhân dày dạn kinh nghiệm, thúc đẩy sự phát
-                        triển cả về chuyên môn và cá nhân của họ. trong lĩnh vực thực hiện tiềm
-                        năng.
+                        {t('footer.description2')}
                     </p>
                 </div>
 
                 <div>
-                    <h3 className="text-[1.6rem] font-semibold mb-3">Liên kết</h3>
+                    <h3 className="text-[1.6rem] font-semibold mb-3">{t('footer.links')}</h3>
                     <ul className="flex flex-col gap-2 text-[1.4rem]">
-                        <li>
-                            <Link href="/">Trang chủ</Link>
-                        </li>
-                        <li>
-                            <Link href="/about">Giới thiệu</Link>
-                        </li>
-                        <li>
-                            <Link href="/posts">Bài viết</Link>
-                        </li>
-                        <li>
-                            <Link href="/contact">Liên hệ</Link>
-                        </li>
+                        {pages.map((item, index) => (
+                            <li key={index}>
+                                <Link href={item.link}>{item.label}</Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
                 <div>
-                    <h3 className="text-[1.6rem] font-semibold mb-3">Kết nối</h3>
+                    <h3 className="text-[1.6rem] font-semibold mb-3">{t('footer.contact')}</h3>
                     <div className="flex items-center gap-4">
                         <Link
                             href="https://github.com"

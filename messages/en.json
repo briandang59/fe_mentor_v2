@@ -1,0 +1,19 @@
+{
+    "title": "Mentor Hub",
+    "description": "Mentors system with i18n",
+    "header": {
+        "home": "Home",
+        "posts": "Posts",
+        "contracts": "Contracts",
+        "messages": "Messages",
+        "rooms": "Rooms",
+        "login": "Log in",
+        "signup": "Sign up"
+    },
+    "footer": {
+        "description1": "A website where IT professionals can find mentors",
+        "description2": "Our goal is to provide mentees with the opportunity to grow and learn from experienced individuals, fostering their professional and personal development to help them reach their full potential.",
+        "links": "Links",
+        "contact": "Contact"
+    }
+}

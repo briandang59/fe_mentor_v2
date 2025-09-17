@@ -1,0 +1,20 @@
+{
+    "title": "Mentor Hub",
+    "description": "Mentors system with i18n",
+
+    "header": {
+        "home": "Trang chủ",
+        "posts": "Bài viết",
+        "contracts": "Hợp đồng",
+        "messages": "Tin nhắn",
+        "rooms": "Phòng",
+        "login": "Đăng nhập",
+        "signup": "Đăng ký"
+    },
+    "footer": {
+        "description1": "Một trang web nơi các chuyên gia Công nghệ thông tin có thể tìm thấy người cố vấn",
+        "description2": "Mục tiêu của chúng tôi là cung cấp cho những người được cố vấn cơ hội phát triển và học hỏi từ những cá nhân dày dạn kinh nghiệm, thúc đẩy sự phát triển cả về chuyên môn và cá nhân của họ. trong lĩnh vực thực hiện tiềm năng.",
+        "links": "Liên kết",
+        "contact": "Liên hệ"
+    }
+}

@@ -1,10 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 import { paths } from './utils/constants/paths';
+
+const i18nMiddleware = createMiddleware(routing);
 
 const AUTH_PAGES = ['/log-in', '/sign-up', '/verify-email'];
 const REDIRECT_AFTER_LOGIN = paths.home || '/';
 
 export function middleware(req: NextRequest) {
+    const i18nResponse = i18nMiddleware(req);
+    if (i18nResponse) {
+        return i18nResponse;
+    }
+
     const token = req.cookies.get('token')?.value;
     const pathname = req.nextUrl.pathname;
 
@@ -17,5 +26,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/log-in', '/sign-up', '/verify-email'],
+    matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)', '/log-in', '/sign-up', '/verify-email'],
 };

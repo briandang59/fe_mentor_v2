@@ -1,0 +1,20 @@
+{
+    "title": "Mentor Hub",
+    "description": "Mentors system with i18n",
+
+    "header": {
+        "home": "首页",
+        "posts": "文章",
+        "contracts": "合同",
+        "messages": "消息",
+        "rooms": "房间",
+        "login": "登录",
+        "signup": "注册"
+    },
+    "footer": {
+        "description1": "一个让 IT 专业人士可以找到导师的网站",
+        "description2": "我们的目标是为学员提供与有经验的人士学习和成长的机会，促进他们的专业和个人发展，帮助他们实现自己的潜力。",
+        "links": "链接",
+        "contact": "联系"
+    }
+}
