@@ -1,4 +1,5 @@
 'use client';
+
 import { Form, Button } from 'antd';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,6 +7,8 @@ import { LoginFormValues, loginSchema } from '@/utils/schemas/login';
 import { FormInput } from '../formsComponent';
 import Link from 'next/link';
 import { paths } from '@/utils/constants/paths';
+import { APIS } from '@/lib/apis';
+import toast from 'react-hot-toast';
 
 function LoginForm() {
     const {
@@ -21,7 +24,20 @@ function LoginForm() {
     });
 
     const onSubmit = async (data: LoginFormValues) => {
-        console.log('✅ Dữ liệu hợp lệ:', data);
+        await toast.promise(APIS.auth.login(data), {
+            loading: 'Đang đăng nhập...',
+            success: (res) => {
+                if (res.data?.token) {
+                    document.cookie = `token=${res.data.token}`;
+                }
+
+                return res.message || 'Đăng nhập thành công 🎉';
+            },
+            error: (err) => {
+                return err instanceof Error ? `Lỗi: ${err.message}` : 'Đăng nhập thất bại!';
+            },
+        });
+        window.location.href = paths.home || '/';
     };
 
     return (
@@ -44,7 +60,7 @@ function LoginForm() {
                 error={errors.password?.message}
             />
             <div className="flex items-center justify-end mb-[2rem]">
-                <Link href={`${paths.forgot_password}`} className="!text-primary">
+                <Link href={paths.forgot_password} className="!text-primary">
                     Quên mật khẩu?
                 </Link>
             </div>

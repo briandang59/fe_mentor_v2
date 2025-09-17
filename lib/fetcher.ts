@@ -1,5 +1,6 @@
+// Update in fetcher.ts
 import { redirect } from 'next/navigation';
-import { getTokenClient, getTokenServer } from './getToken';
+import { getTokenClient } from './getToken.client';
 
 type FetchOptions = RequestInit & { requireAuth?: boolean };
 
@@ -7,13 +8,7 @@ export async function fetchData<TResponse = unknown>(
     url: string,
     options: FetchOptions = {},
 ): Promise<TResponse> {
-    let token: string | undefined;
-
-    if (typeof window === 'undefined') {
-        token = await getTokenServer();
-    } else {
-        token = getTokenClient();
-    }
+    const token = getTokenClient();
 
     const baseURL = process.env.NEXT_PUBLIC_API_URL || '';
     const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
@@ -37,11 +32,9 @@ export async function fetchData<TResponse = unknown>(
     if (!res.ok) {
         let errorMsg = `Request failed with status ${res.status}`;
         try {
-            const errorBody = (await res.json()) as { message?: string };
+            const errorBody = await res.json();
             errorMsg = errorBody.message || errorMsg;
-        } catch {
-            // ignore JSON parse error
-        }
+        } catch {}
 
         if (res.status === 401) {
             if (typeof window !== 'undefined') {
