@@ -24,10 +24,10 @@ html {
 .dark {
     --color-foreground: #e2e8f0;
     --color-background: #141414;
-    --color-tag: #2e2e2e;
+    --color-tag: #272727;
     --color-header-bg: #030507;
     --color-footer-bg: #030507;
     --color-content-bg: #030507;
-    --color-primary: #dcca87;
-    --color-border: #dcca87;
+    --color-primary: #006d3b;
+    --color-border: #006d3b;
 }

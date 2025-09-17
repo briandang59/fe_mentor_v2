@@ -24,4 +24,8 @@ export const APIS = {
         verify_email: (token: string) =>
             fetchData(`/${urls.verify_email}?token=${token}`, { requireAuth: false }),
     },
+
+    tag: {
+        getAll: () => fetchData(`/${urls.tags}`, { requireAuth: true }),
+    },
 };
