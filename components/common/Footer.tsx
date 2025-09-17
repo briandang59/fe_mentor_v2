@@ -8,7 +8,7 @@ function Footer() {
     const t = useTranslations();
     const pages = usePages();
     return (
-        <footer className="text-[var(--color-foreground)] border-t border-t-border dark:border-transparent">
+        <footer className="text-[var(--color-foreground)] border-t border-t-border dark:border-transparent bg-footer-bg">
             <div className="max-w-[144rem] mx-auto px-4 py-8 grid md:grid-cols-3 gap-8">
                 <div className="flex flex-col gap-4">
                     <h2 className="text-[1.8rem] font-bold text-primary">Mentor Hub</h2>

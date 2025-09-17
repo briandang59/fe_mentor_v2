@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className='flex flex-col gap-[1rem]'>
+        <div className='flex flex-col'>
             <Header />
             <main className="pt-[7rem] bg-content-bg min-h-screen">{children}</main>
             <Footer />
