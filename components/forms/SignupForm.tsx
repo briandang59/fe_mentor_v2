@@ -32,7 +32,7 @@ function SignUpForm() {
 
         await toast.promise(APIS.auth.register(payload), {
             loading: 'Đang đăng ký...',
-            success: 'Đăng ký thành công 🎉',
+            success: 'Đăng ký thành công ',
             error: (err) => {
                 if (err instanceof Error && err.message) {
                     return `Lỗi: ${err.message}`;

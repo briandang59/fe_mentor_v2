@@ -37,10 +37,13 @@ export async function fetchData<TResponse = unknown>(
         } catch {}
 
         if (res.status === 401) {
-            if (typeof window !== 'undefined') {
-                window.location.href = '/log-in';
-            } else {
-                redirect('/log-in');
+            const isAuthEndpoint = url.includes('/login') || url.includes('/register');
+            if (!isAuthEndpoint) {
+                if (typeof window !== 'undefined') {
+                    window.location.href = '/log-in';
+                } else {
+                    redirect('/log-in');
+                }
             }
         }
 

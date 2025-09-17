@@ -9,8 +9,10 @@ import Link from 'next/link';
 import { paths } from '@/utils/constants/paths';
 import { APIS } from '@/lib/apis';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 function LoginForm() {
+    const router = useRouter();
     const {
         control,
         handleSubmit,
@@ -29,15 +31,15 @@ function LoginForm() {
             success: (res) => {
                 if (res.data?.token) {
                     document.cookie = `token=${res.data.token}`;
+                    router.push(paths.home);
                 }
 
-                return res.message || 'Đăng nhập thành công 🎉';
+                return 'Đăng nhập thành công ';
             },
             error: (err) => {
                 return err instanceof Error ? `Lỗi: ${err.message}` : 'Đăng nhập thất bại!';
             },
         });
-        window.location.href = paths.home || '/';
     };
 
     return (

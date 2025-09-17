@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { paths } from './utils/constants/paths';
 
 const AUTH_PAGES = ['/log-in', '/sign-up', '/verify-email'];
-const REDIRECT_AFTER_LOGIN = paths.home || '/dashboard';
+const REDIRECT_AFTER_LOGIN = paths.home || '/';
 
 export function middleware(req: NextRequest) {
     const token = req.cookies.get('token')?.value;
