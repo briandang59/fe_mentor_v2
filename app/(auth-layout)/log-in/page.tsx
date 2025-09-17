@@ -9,7 +9,7 @@ function Login() {
     return (
         <BaseWrapper>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-[2rem] h-screen items-center justify-center">
-                <div className="flex flex-col items-center justify-center gap-[2rem] p-[2rem] rounded-[1rem] h-[50rem] shadow-sm">
+                <div className="flex flex-col items-center justify-center gap-[2rem] p-[2rem] rounded-[1rem] h-[50rem]">
                     <h1 className="text-center text-[2.4rem] md:text-[3.2rem] font-bold text-primary">
                         Đăng nhập hệ thống mentors
                     </h1>

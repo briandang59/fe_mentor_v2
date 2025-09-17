@@ -12,6 +12,7 @@ export default function ToastProvider() {
                     background: '#333',
                     color: '#fff',
                     borderRadius: '8px',
+                    fontSize: '14px',
                 },
                 success: {
                     iconTheme: {
