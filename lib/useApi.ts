@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR, { SWRConfiguration, SWRResponse } from 'swr';
-import { fetchData } from '../fetcher';
+import { fetchData } from './fetcher';
 
 export function useApi<TResponse = unknown>(
     key: string | null,

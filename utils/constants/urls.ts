@@ -3,4 +3,5 @@ export const urls = {
     register: 'register',
     login: 'login',
     verify_email: 'verify-email',
+    tags: 'tags',
 };

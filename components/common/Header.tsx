@@ -2,17 +2,18 @@
 
 import { pages } from '@/utils/constants/page';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
 import { Bell, CirclePoundSterling, List } from 'lucide-react';
-import { Badge, Button, Drawer } from 'antd';
+import { Badge, Drawer } from 'antd';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { paths } from '@/utils/constants/paths';
 
 function Header() {
+    const router = useRouter();
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [hidden, setHidden] = useState(false);
@@ -21,18 +22,14 @@ function Header() {
     const showDrawer = useCallback(() => setOpen(true), []);
     const onClose = useCallback(() => setOpen(false), []);
 
-    // Theo dõi scroll
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-
-            // Nếu cuộn xuống và đã vượt quá 80px thì ẩn header
             if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
                 setHidden(true);
             } else {
                 setHidden(false);
             }
-
             lastScrollY.current = currentScrollY;
         };
 
@@ -52,9 +49,7 @@ function Header() {
                             isActived ? 'font-semibold text-primary' : 'opacity-50',
                         )}
                     >
-                        <Link href={page.link} className="!text-primary">
-                            {page.label}
-                        </Link>
+                        <Link href={page.link}>{page.label}</Link>
                     </li>
                 );
             })}
@@ -85,7 +80,7 @@ function Header() {
                     </aside>
                 </div>
 
-                <div className="items-center gap-[2rem] lg:flex hidden">
+                <div className="items-center gap-[1rem] lg:flex hidden">
                     <div className="flex items-center gap-[1rem]">
                         <CirclePoundSterling className="w-8 h-8" />
                         <span className="text-[1.4rem]">9,999</span>
@@ -97,18 +92,25 @@ function Header() {
                     </button>
                     <ThemeToggle />
                     <Link
-                        href={`/${paths.login}`}
+                        href={paths.login}
                         className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border text-nowrap"
                     >
-                        Bắt đầu
+                        Đăng nhập
+                    </Link>
+                    <Link
+                        href={paths.signup}
+                        className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-white bg-primary font-semibold text-nowrap"
+                    >
+                        Đăng ký
                     </Link>
                 </div>
 
                 <div className="lg:hidden block">
-                    <Button aria-label="Open Menu" onClick={showDrawer}>
+                    <button aria-label="Open Menu" className="cursor-pointer" onClick={showDrawer}>
                         <List />
-                    </Button>
+                    </button>
                 </div>
+
                 <Drawer
                     title={<span className="text-[1.6rem] font-semibold">Menu</span>}
                     onClose={onClose}
@@ -117,7 +119,32 @@ function Header() {
                     <aside className="mb-[2rem]">
                         <NavMenu isVertical />
                     </aside>
-                    <ThemeToggle />
+
+                    <div className="flex flex-col gap-[1rem] mt-[2rem]">
+                        <button
+                            onClick={() => {
+                                onClose();
+                                router.push(paths.login);
+                            }}
+                            className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] border border-border font-semibold hover:opacity-90 transition text-primary"
+                        >
+                            Đăng nhập
+                        </button>
+
+                        <button
+                            onClick={() => {
+                                onClose();
+                                router.push(paths.signup);
+                            }}
+                            className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] bg-primary text-white font-semibold hover:opacity-90 transition"
+                        >
+                            Đăng ký
+                        </button>
+                    </div>
+
+                    <div className="mt-[2rem]">
+                        <ThemeToggle />
+                    </div>
                 </Drawer>
             </div>
         </header>
