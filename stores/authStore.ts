@@ -16,29 +16,25 @@ type AuthState = {
     user: User | null;
     setAuth: (token: string, user: User) => void;
     clearAuth: () => void;
-    loadFromCookies: () => void;
 };
 
-export const useAuthStore = create<AuthState>((set) => ({
-    token: Cookies.get('token') ?? null,
-    user: (() => {
-        const userStr = Cookies.get('user');
-        return userStr ? (JSON.parse(userStr) as User) : null;
-    })(),
-    setAuth: (token, user) => {
-        Cookies.set('token', token, { path: '/' });
-        Cookies.set('user', JSON.stringify(user), { path: '/' });
-        set({ token, user });
-    },
-    clearAuth: () => {
-        Cookies.remove('token');
-        Cookies.remove('user');
-        set({ token: null, user: null });
-    },
-    loadFromCookies: () => {
-        const token = Cookies.get('token') ?? null;
-        const userStr = Cookies.get('user');
-        const user = userStr ? (JSON.parse(userStr) as User) : null;
-        set({ token, user });
-    },
-}));
+export const useAuthStore = create<AuthState>((set) => {
+    const token = Cookies.get('token') ?? null;
+    const userStr = Cookies.get('user');
+    const user = userStr ? (JSON.parse(userStr) as User) : null;
+
+    return {
+        token,
+        user,
+        setAuth: (token, user) => {
+            Cookies.set('token', token, { path: '/' });
+            Cookies.set('user', JSON.stringify(user), { path: '/' });
+            set({ token, user });
+        },
+        clearAuth: () => {
+            Cookies.remove('token');
+            Cookies.remove('user');
+            set({ token: null, user: null });
+        },
+    };
+});
