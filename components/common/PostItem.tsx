@@ -20,8 +20,8 @@ function PostItem({ record }: PostItemProps) {
                 <span className="text-foreground text-[1.2rem]">
                     {calculateTimeAgo(record?.created_at)}
                 </span>
-                <button className="text-primary cursor-pointer">
-                    <Bookmark />
+                <button className="text-foreground cursor-pointer">
+                    <Bookmark className="w-8 h-8" />
                 </button>
             </div>
             <h3 className="text-[1.8rem] font-semibold text-primary">{record?.title}</h3>

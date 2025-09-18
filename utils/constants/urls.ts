@@ -4,4 +4,5 @@ export const urls = {
     login: 'login',
     verify_email: 'verify-email',
     tags: 'tags',
+    posts: 'posts',
 };

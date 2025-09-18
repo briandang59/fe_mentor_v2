@@ -7,13 +7,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
-import { Bell, List } from 'lucide-react';
+import { Bell, DollarSignIcon, List, UserRound } from 'lucide-react';
 import { Badge, Button, Drawer, Popover, Spin } from 'antd';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { paths } from '@/utils/constants/paths';
 import { useTranslations } from 'next-intl';
 import { LanguageToggle } from './LanguageToggle';
-import { useAuthStore } from '@/stores/authStore';
 import UserUI from './UserUI';
 import { useAuth } from '@/utils/hooks/useAuth';
 
@@ -50,13 +49,20 @@ function Header() {
     const NavMenu = ({ isVertical = false }: { isVertical?: boolean }) => (
         <ul className={clsx('gap-4', isVertical ? 'flex flex-col' : 'flex items-center')}>
             {pages.map((page) => {
-                const isActived = pathname === page.link;
+                const normalize = (str: string) =>
+                    str.endsWith('/') && str.length > 1 ? str.slice(0, -1) : str;
+
+                const locale = pathname.split('/')[1];
+                const fullLink = page.link === '/' ? `/${locale}/` : `/${locale}${page.link}`;
+
+                const isActived = normalize(pathname) === normalize(fullLink);
+
                 return (
                     <li
                         key={page.link}
                         className={clsx(
                             'px-2 py-1 rounded transition-colors text-[1.4rem] uppercase hover:text-primary duration-300 text-nowrap',
-                            isActived ? 'font-semibold text-primary' : 'opacity-50',
+                            isActived ? 'font-bold text-primary' : 'text-foreground opacity-50',
                         )}
                     >
                         <Link href={page.link} className="!text-inherit">
@@ -102,7 +108,25 @@ function Header() {
                     {isAuthenticated && user ? (
                         <Popover
                             content={
-                                <div className="flex flex-col gap-[1rem]">
+                                <div className="flex flex-col gap-[1rem] w-[15rem]">
+                                    <div className="flex items-center gap-[2rem]">
+                                        <UserRound className="w-6 h-6" />
+                                        <Link
+                                            href={`/${user.username}`}
+                                            className="!text-foreground"
+                                        >
+                                            Hồ sơ của tôi
+                                        </Link>
+                                    </div>
+                                    <div className="flex items-center gap-[2rem]">
+                                        <DollarSignIcon className="w-6 h-6" />
+                                        <Link
+                                            href={`/${user.username}`}
+                                            className="!text-foreground"
+                                        >
+                                            Ví của tôi
+                                        </Link>
+                                    </div>
                                     <ThemeToggle />
                                     <LanguageToggle />
                                     <Button
@@ -119,7 +143,6 @@ function Header() {
                             }
                             trigger="click"
                             placement="bottomRight"
-                            overlayStyle={{ zIndex: 9999 }}
                         >
                             <span className="inline-flex cursor-pointer">
                                 <UserUI type="header" user={user} />

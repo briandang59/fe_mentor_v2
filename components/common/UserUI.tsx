@@ -17,7 +17,6 @@ export default function UserUI({ user, type }: UserUIProps) {
                         {user.username.charAt(0)}
                     </span>
                 </div>
-                <span className="text-[1.4rem]">{user.username}</span>
             </button>
         );
     }
