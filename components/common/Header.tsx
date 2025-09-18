@@ -60,7 +60,9 @@ function Header() {
                             isActived ? 'font-semibold text-primary' : 'opacity-50',
                         )}
                     >
-                        <Link href={page.link}>{page.label}</Link>
+                        <Link href={page.link} className="!text-inherit">
+                            {page.label}
+                        </Link>
                     </li>
                 );
             })}
