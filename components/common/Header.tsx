@@ -8,13 +8,14 @@ import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
 import { Bell, List } from 'lucide-react';
-import { Badge, Button, Drawer, Popover } from 'antd';
+import { Badge, Button, Drawer, Popover, Spin } from 'antd';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { paths } from '@/utils/constants/paths';
 import { useTranslations } from 'next-intl';
 import { LanguageToggle } from './LanguageToggle';
 import { useAuthStore } from '@/stores/authStore';
 import UserUI from './UserUI';
+import { useAuth } from '@/utils/hooks/useAuth';
 
 function Header() {
     const router = useRouter();
@@ -27,11 +28,7 @@ function Header() {
     const showDrawer = useCallback(() => setOpen(true), []);
     const onClose = useCallback(() => setOpen(false), []);
     const t = useTranslations();
-    const { token, user, clearAuth, loadFromCookies } = useAuthStore();
-
-    useEffect(() => {
-        loadFromCookies();
-    }, [loadFromCookies]);
+    const { isAuthenticated, user, isLoading, logout } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -47,7 +44,9 @@ function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
+    if (isLoading) {
+        return <Spin />;
+    }
     const NavMenu = ({ isVertical = false }: { isVertical?: boolean }) => (
         <ul className={clsx('gap-4', isVertical ? 'flex flex-col' : 'flex items-center')}>
             {pages.map((page) => {
@@ -100,7 +99,7 @@ function Header() {
                         </Badge>
                     </button>
 
-                    {token && user ? (
+                    {isAuthenticated && user ? (
                         <Popover
                             content={
                                 <div className="flex flex-col gap-[1rem]">
@@ -108,7 +107,7 @@ function Header() {
                                     <LanguageToggle />
                                     <Button
                                         onClick={() => {
-                                            clearAuth();
+                                            logout();
                                             router.push(paths.login);
                                         }}
                                         danger
@@ -156,7 +155,7 @@ function Header() {
                     </aside>
 
                     <div className="flex flex-col gap-[1rem] mt-[2rem]">
-                        {token && user ? (
+                        {isAuthenticated && user ? (
                             <>
                                 <div className="flex items-center gap-3 mb-3">
                                     <UserUI type="header" user={user} />
@@ -167,7 +166,7 @@ function Header() {
                                     block
                                     className="text-left !font-medium"
                                     onClick={() => {
-                                        clearAuth();
+                                        logout();
                                         onClose();
                                         router.push(paths.login);
                                     }}
