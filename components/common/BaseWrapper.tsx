@@ -6,7 +6,9 @@ interface BaseWrapperProps {
     className?: string;
 }
 function BaseWrapper({ children, className }: BaseWrapperProps) {
-    return <div className={clsx('max-w-[144rem] mx-auto p-[1rem]', className)}>{children}</div>;
+    return (
+        <div className={clsx('max-w-[144rem] mx-auto p-[1rem] lg:p-0', className)}>{children}</div>
+    );
 }
 
 export default BaseWrapper;
