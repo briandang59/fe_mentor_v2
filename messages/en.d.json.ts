@@ -3,7 +3,7 @@
 
 declare const messages: {
     "title": "Mentor Hub",
-    "description": "Mentors system with i18n",
+    "description": "Mentors hub with i18n",
     "header": {
         "home": "Home",
         "posts": "Posts",

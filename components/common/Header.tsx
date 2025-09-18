@@ -8,11 +8,13 @@ import Image from 'next/image';
 import { images } from '@/assets/images';
 import { ThemeToggle } from './ThemeToggle';
 import { Bell, List } from 'lucide-react';
-import { Badge, Drawer } from 'antd';
+import { Badge, Button, Drawer, Popover } from 'antd';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { paths } from '@/utils/constants/paths';
 import { useTranslations } from 'next-intl';
 import { LanguageToggle } from './LanguageToggle';
+import { useAuthStore } from '@/stores/authStore';
+import UserUI from './UserUI';
 
 function Header() {
     const router = useRouter();
@@ -25,6 +27,11 @@ function Header() {
     const showDrawer = useCallback(() => setOpen(true), []);
     const onClose = useCallback(() => setOpen(false), []);
     const t = useTranslations();
+    const { token, user, clearAuth, loadFromCookies } = useAuthStore();
+
+    useEffect(() => {
+        loadFromCookies();
+    }, [loadFromCookies]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -85,25 +92,54 @@ function Header() {
                 </div>
 
                 <div className="items-center gap-[1rem] lg:flex hidden">
-                    <button className="cursor-pointer">
+                    <button className="cursor-pointer flex items-center justify-center mr-[1rem]">
                         <Badge count={5} size="small">
                             <Bell className="w-8 h-8" />
                         </Badge>
                     </button>
-                    <ThemeToggle />
-                    <LanguageToggle />
-                    <Link
-                        href={paths.login}
-                        className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border text-nowrap"
-                    >
-                        {t('header.login')}
-                    </Link>
-                    <Link
-                        href={paths.signup}
-                        className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-white bg-primary font-semibold text-nowrap"
-                    >
-                        {t('header.signup')}
-                    </Link>
+
+                    {token && user ? (
+                        <Popover
+                            content={
+                                <div className="flex flex-col gap-[1rem]">
+                                    <ThemeToggle />
+                                    <LanguageToggle />
+                                    <Button
+                                        onClick={() => {
+                                            clearAuth();
+                                            router.push(paths.login);
+                                        }}
+                                        danger
+                                        className="text-left text-red-500 hover:opacity-80 !font-medium"
+                                    >
+                                        Đăng xuất
+                                    </Button>
+                                </div>
+                            }
+                            trigger="click"
+                            placement="bottomRight"
+                            overlayStyle={{ zIndex: 9999 }}
+                        >
+                            <span className="inline-flex cursor-pointer">
+                                <UserUI type="header" user={user} />
+                            </span>
+                        </Popover>
+                    ) : (
+                        <>
+                            <Link
+                                href={paths.login}
+                                className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-primary font-semibold border border-border text-nowrap"
+                            >
+                                {t('header.login')}
+                            </Link>
+                            <Link
+                                href={paths.signup}
+                                className="p-[1rem] rounded-[1rem] text-[1.4rem] cursor-pointer hover:opacity-90 duration-300 text-white bg-primary font-semibold text-nowrap"
+                            >
+                                {t('header.signup')}
+                            </Link>
+                        </>
+                    )}
                 </div>
 
                 <div className="lg:hidden block">
@@ -118,28 +154,51 @@ function Header() {
                     </aside>
 
                     <div className="flex flex-col gap-[1rem] mt-[2rem]">
-                        <button
-                            onClick={() => {
-                                onClose();
-                                router.push(paths.login);
-                            }}
-                            className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] border border-border font-semibold hover:opacity-90 transition text-primary"
-                        >
-                            {t('header.login')}
-                        </button>
+                        {token && user ? (
+                            <>
+                                <div className="flex items-center gap-3 mb-3">
+                                    <UserUI type="header" user={user} />
+                                </div>
 
-                        <button
-                            onClick={() => {
-                                onClose();
-                                router.push(paths.signup);
-                            }}
-                            className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] bg-primary text-white font-semibold hover:opacity-90 transition"
-                        >
-                            {t('header.signup')}
-                        </button>
+                                <Button
+                                    danger
+                                    block
+                                    className="text-left !font-medium"
+                                    onClick={() => {
+                                        clearAuth();
+                                        onClose();
+                                        router.push(paths.login);
+                                    }}
+                                >
+                                    Đăng xuất
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    onClick={() => {
+                                        onClose();
+                                        router.push(paths.login);
+                                    }}
+                                    className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] border border-border font-semibold hover:opacity-90 transition text-primary"
+                                >
+                                    {t('header.login')}
+                                </button>
+
+                                <button
+                                    onClick={() => {
+                                        onClose();
+                                        router.push(paths.signup);
+                                    }}
+                                    className="block text-center p-[1rem] rounded-[0.8rem] text-[1.4rem] bg-primary text-white font-semibold hover:opacity-90 transition"
+                                >
+                                    {t('header.signup')}
+                                </button>
+                            </>
+                        )}
                     </div>
 
-                    <div className="mt-[2rem]">
+                    <div className="mt-[2rem] flex flex-col gap-[1rem]">
                         <ThemeToggle />
                         <LanguageToggle />
                     </div>

@@ -4,7 +4,7 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 
 export const metadata: Metadata = {
-    title: 'Mentors System',
+    title: 'Mentors Hub',
     description: 'Main layout pages',
 };
 

@@ -47,7 +47,7 @@ export function ThemeToggle() {
             options={options}
             value={theme}
             onChange={(val) => setTheme(val as string)}
-            className="bg-background/60 backdrop-blur-md"
+            className="bg-background/60 backdrop-blur-md w-fit"
         />
     );
 }

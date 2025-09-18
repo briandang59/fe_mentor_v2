@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Omit<RootLocaleLayoutProps, '
 
     return {
         title: t('title'),
-        description: t('description', { default: 'Mentors system with i18n' }),
+        description: t('description', { default: 'Mentors hub with i18n' }),
     };
 }
 
