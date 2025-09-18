@@ -10,9 +10,11 @@ import { paths } from '@/utils/constants/paths';
 import { APIS } from '@/lib/apis';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/stores/authStore';
 
 function LoginForm() {
     const router = useRouter();
+    const { setAuth } = useAuthStore.getState();
     const {
         control,
         handleSubmit,
@@ -30,7 +32,7 @@ function LoginForm() {
             loading: 'Đang đăng nhập...',
             success: (res) => {
                 if (res.data?.token) {
-                    document.cookie = `token=${res.data.token}`;
+                    setAuth(res.data.token, res.data.user);
                     router.push(paths.home);
                 }
 

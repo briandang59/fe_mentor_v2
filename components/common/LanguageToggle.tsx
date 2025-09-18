@@ -5,9 +5,9 @@ import { Segmented } from 'antd';
 import { useLocale } from 'next-intl';
 
 const options = [
-    { label: '🇺🇸 EN', value: 'en' },
-    { label: '🇻🇳 VI', value: 'vi' },
-    { label: '🇨🇳 中文', value: 'zh' },
+    { label: 'EN', value: 'en' },
+    { label: 'VI', value: 'vi' },
+    { label: '中文', value: 'zh' },
 ];
 
 export function LanguageToggle() {
@@ -26,7 +26,7 @@ export function LanguageToggle() {
             options={options}
             value={locale}
             onChange={(val) => changeLocale(val as string)}
-            className="bg-background/60 backdrop-blur-md"
+            className="bg-background/60 backdrop-blur-md w-fit"
         />
     );
 }

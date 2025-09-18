@@ -9,22 +9,28 @@ const AUTH_PAGES = ['/log-in', '/sign-up', '/verify-email'];
 const REDIRECT_AFTER_LOGIN = paths.home || '/';
 
 export function middleware(req: NextRequest) {
-    const i18nResponse = i18nMiddleware(req);
-    if (i18nResponse) {
-        return i18nResponse;
-    }
-
     const token = req.cookies.get('token')?.value;
     const pathname = req.nextUrl.pathname;
 
-    if (token && AUTH_PAGES.includes(pathname)) {
+    const localePattern = new RegExp(`^/(${routing.locales.join('|')})(?=/|$)`);
+    const pathnameWithoutLocale = pathname.replace(localePattern, '') || '/';
+
+    if (token && AUTH_PAGES.includes(pathnameWithoutLocale)) {
         const redirectUrl = new URL(REDIRECT_AFTER_LOGIN, req.url);
         return NextResponse.redirect(redirectUrl);
     }
 
-    return NextResponse.next();
+    return i18nMiddleware(req);
 }
 
 export const config = {
-    matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)', '/log-in', '/sign-up', '/verify-email'],
+    matcher: [
+        '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
+        '/:locale/log-in',
+        '/:locale/sign-up',
+        '/:locale/verify-email',
+        '/log-in',
+        '/sign-up',
+        '/verify-email',
+    ],
 };
