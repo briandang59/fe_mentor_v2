@@ -7,4 +7,5 @@ export const urls = {
     posts: 'posts',
     profiles: 'profiles',
     me: 'me',
+    username:"username"
 };

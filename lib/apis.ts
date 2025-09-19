@@ -45,6 +45,9 @@ export const APIS = {
                 fetchServer<BaseResponse<Profile>>(`/${urls.profiles}/${urls.me}`, {
                     requireAuth: true,
                 }),
+            getByUserName: (username:string) =>      fetchServer<BaseResponse<Profile>>(`/${urls.profiles}/${urls.username}/${username}`, {
+                    requireAuth: false,
+                }),
         },
     },
 };
