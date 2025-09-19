@@ -5,4 +5,6 @@ export const urls = {
     verify_email: 'verify-email',
     tags: 'tags',
     posts: 'posts',
+    profiles: 'profiles',
+    me: 'me',
 };
