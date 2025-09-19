@@ -16,6 +16,8 @@ export async function fetchServer<T = unknown>(
     const baseURL = process.env.NEXT_PUBLIC_API_URL || '';
     const fullUrl = url.startsWith('http') ? url : `${baseURL}${url}`;
 
+    console.log("fullUrl",fullUrl)
+
     const headers: Record<string, string> = {
         'Content-Type': 'application/json',
         ...(options.headers as Record<string, string>),
