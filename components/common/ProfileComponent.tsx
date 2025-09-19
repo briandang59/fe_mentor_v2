@@ -8,9 +8,10 @@ import Link from 'next/link';
 
 interface ProfileComponentProps {
     profile: Profile;
+    type?:"public" | "private"
 }
 
-async function ProfileComponent({ profile }: ProfileComponentProps) {
+async function ProfileComponent({ profile, type = 'private' }: ProfileComponentProps) {
     const availabilityStrings = (profile.available_times ?? []).map(
         (time) => `${time.day}: ${time.from} - ${time.to}`,
     );
@@ -38,7 +39,7 @@ async function ProfileComponent({ profile }: ProfileComponentProps) {
         <BaseWrapper className="mt-[2rem] max-w-7xl mx-auto">
             <div className="flex md:flex-row flex-col md:items-center justify-between gap-[1.5rem] mb-[2rem]">
                 <div className="flex items-center gap-[2rem]">
-                    <div className="size-[7rem] rounded-full bg-background flex items-center justify-center shadow-md ring-2 ring-border overflow-hidden">
+                    <div className="size-[10rem] rounded-full bg-background flex items-center justify-center shadow-md ring-2 ring-border overflow-hidden">
                         {profile.profile_image?.url ? (
                             <Image
                                 src={profile.profile_image.url}
@@ -68,9 +69,9 @@ async function ProfileComponent({ profile }: ProfileComponentProps) {
                         </h3>
                     </div>
                 </div>
-                <Button type="primary" size="large" className="w-fit">
+               {type === 'private' && <Button type="primary" size="large" className="w-fit">
                     Edit profile
-                </Button>
+                </Button>}
             </div>
 
             <Divider className="my-[2rem]" />
