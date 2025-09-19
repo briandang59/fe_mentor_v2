@@ -6,7 +6,9 @@ import banner3 from './banner3.jpg';
 import banner4 from './banner4.jpg';
 import banner5 from './banner5.jpg';
 import banner6 from './banner6.jpg';
+import error from "./error.png"
 export const images = {
+    error,
     logo,
     thumbnailLogin,
     banner1,
