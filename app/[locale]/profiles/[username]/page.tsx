@@ -20,5 +20,5 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
         );
     }
 
-    return <ProfileComponent profile={profile}  />;
+    return <ProfileComponent profile={profile}  type='public'/>;
 }

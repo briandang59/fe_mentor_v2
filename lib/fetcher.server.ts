@@ -33,7 +33,7 @@ export async function fetchServer<T = unknown>(
 
     if (!res.ok) {
         if (res.status === 401 && options.requireAuth) {
-            redirect('/login'); // Assuming '/login' is the correct path
+            redirect('/log-in'); // Assuming '/login' is the correct path
         }
         throw new Error(`Request failed with status ${res.status}`);
     }
