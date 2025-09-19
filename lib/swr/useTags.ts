@@ -1,9 +1,9 @@
 import { useApi } from '@/lib/useApi';
-import { fetchData } from '@/lib/fetcher';
 import { BaseResponse } from '@/types/responses/base';
 import { TagResponseType } from '@/types/responses/tag';
 import qs from 'qs';
 import { urls } from '@/utils/constants/urls';
+import { fetchClient } from '../fetcher.client';
 
 interface params {
     search?: string;
@@ -16,6 +16,6 @@ export function useTags(params: params) {
 
     return useApi<BaseResponse<TagResponseType[]>>(key, {
         requireAuth: true,
-        fetcher: () => fetchData(key, { requireAuth: true }),
+        fetcher: () => fetchClient(key, { requireAuth: true }),
     });
 }
