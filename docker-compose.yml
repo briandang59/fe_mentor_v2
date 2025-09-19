@@ -1,7 +1,9 @@
 services:
-  frontend_mentor:
-    build: .
-    container_name: mentorhub_web_fe
-    ports:
-      - "4000:3000"
-    restart: always
+    frontend_mentor:
+        build: .
+        extra_hosts:
+            - 'mentor-hub.io.vn:${VPS_IP}'
+        container_name: mentorhub_web_fe
+        ports:
+            - '4000:3000'
+        restart: always
