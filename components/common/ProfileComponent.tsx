@@ -2,13 +2,14 @@ import BaseWrapper from '@/components/common/BaseWrapper';
 import Tag from '@/components/common/Tag';
 import { Profile } from '@/types/responses/profile';
 import { Button, Divider } from 'antd';
+import dayjs from 'dayjs';
 import { Verified, Clock, Briefcase, Globe, Mail, GraduationCap, Code } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface ProfileComponentProps {
     profile: Profile;
-    type?:"public" | "private"
+    type?: 'public' | 'private';
 }
 
 async function ProfileComponent({ profile, type = 'private' }: ProfileComponentProps) {
@@ -28,18 +29,11 @@ async function ProfileComponent({ profile, type = 'private' }: ProfileComponentP
         { label: 'Website', value: profile.contact_information?.website, isLink: true },
     ].filter((item) => item.value);
 
-    const educationStrings = (profile.educations ?? []).map(
-        (edu) =>
-            `${edu.name} - ${edu.object} (${new Date(edu.from).toLocaleDateString()} to ${
-                edu.to ? new Date(edu.to).toLocaleDateString() : 'Present'
-            })`,
-    );
-
     return (
         <BaseWrapper className="mt-[2rem] max-w-7xl mx-auto">
             <div className="flex md:flex-row flex-col md:items-center justify-between gap-[1.5rem] mb-[2rem]">
                 <div className="flex items-center gap-[2rem]">
-                    <div className="size-[10rem] rounded-full bg-background flex items-center justify-center shadow-md ring-2 ring-border overflow-hidden">
+                    <div className="size-[7rem] lg:size-[10rem] rounded-full bg-background flex items-center justify-center shadow-md ring-2 ring-border overflow-hidden">
                         {profile.profile_image?.url ? (
                             <Image
                                 src={profile.profile_image.url}
@@ -69,9 +63,11 @@ async function ProfileComponent({ profile, type = 'private' }: ProfileComponentP
                         </h3>
                     </div>
                 </div>
-               {type === 'private' && <Button type="primary" size="large" className="w-fit">
-                    Edit profile
-                </Button>}
+                {type === 'private' && (
+                    <Button type="primary" size="large" className="w-fit">
+                        Edit profile
+                    </Button>
+                )}
             </div>
 
             <Divider className="my-[2rem]" />
@@ -148,68 +144,99 @@ async function ProfileComponent({ profile, type = 'private' }: ProfileComponentP
 
                 {/* RIGHT */}
                 <div className="flex flex-col gap-[2rem] lg:sticky lg:top-[8rem] self-start">
-                    {[
-                        {
-                            title: 'Skills',
-                            items: (profile.skills ?? []).map((s) => s.tag_name),
-                            icon: <Code size={20} />,
-                        },
-                        { title: 'Contacts', items: contactItems, icon: <Mail size={20} /> },
-                        {
-                            title: 'Languages',
-                            items: (profile.languages ?? []).map((l) => l.name),
-                            icon: <Globe size={20} />,
-                        },
-                        {
-                            title: 'Education',
-                            items: educationStrings,
-                            icon: <GraduationCap size={20} />,
-                        },
-                        {
-                            title: 'Availability',
-                            items: availabilityStrings,
-                            icon: <Clock size={20} />,
-                        },
-                    ].map((section, i) => (
-                        <div key={i} className="p-[2.5rem] rounded-[1.5rem] bg-background shadow-sm">
-                            <h3 className="text-[1.8rem] font-semibold mb-[1.5rem] flex items-center gap-2">
-                                {section.icon} {section.title}
-                            </h3>
-                            <div className="flex flex-wrap gap-[0.6rem]">
-                                {section.items.map(
-                                    (
-                                        item:
-                                            | string
-                                            | { label: string; value: string; isLink: boolean },
-                                        j,
-                                    ) => {
-                                        if (typeof item === 'string') {
-                                            return <Tag key={j} name={item} />;
-                                        } else {
-                                            return item.isLink ? (
-                                                <Link
-                                                    key={j}
-                                                    href={item.value}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    <Tag
-                                                        name={`${item.label}: ${item.value}`}
-                                                        className="hover:bg-primary/80"
-                                                    />
-                                                </Link>
-                                            ) : (
-                                                <Tag
-                                                    key={j}
-                                                    name={`${item.label}: ${item.value}`}
-                                                />
-                                            );
-                                        }
-                                    },
-                                )}
-                            </div>
+                    {/* Skills */}
+                    <div className="p-6 rounded-2xl bg-background shadow-sm">
+                        <h3 className="text-[1.8rem] font-semibold mb-3 flex items-center gap-2 ">
+                            <Code size={18} /> Skills
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {(profile.skills ?? []).map((s) => (
+                                <Tag key={s.id} name={s.tag_name} />
+                            ))}
                         </div>
-                    ))}
+                    </div>
+
+                    {/* Contacts */}
+                    <div className="p-6 rounded-2xl bg-background shadow-sm">
+                        <h3 className="text-[1.8rem] font-semibold mb-3 flex items-center gap-2 ">
+                            <Mail size={18} /> Contacts
+                        </h3>
+                        <div className="flex flex-col gap-2">
+                            {contactItems.map((c, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-1 md:grid-cols-3 md:gap-[2rem] pb-1 text-[1.4rem]"
+                                >
+                                    <span className="font-medium text-foreground">{c.label}</span>
+                                    {c.isLink ? (
+                                        <Link href={c.value} target="_blank">
+                                            {c.value}
+                                        </Link>
+                                    ) : (
+                                        <span className="text-muted-foreground">{c.value}</span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Languages */}
+                    <div className="p-6 rounded-2xl bg-background shadow-sm">
+                        <h3 className="text-[1.8rem] font-semibold mb-3 flex items-center gap-2 ">
+                            <Globe size={18} /> Languages
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {(profile.languages ?? []).map((l) => (
+                                <span
+                                    key={l.id}
+                                    className="px-3 py-1 rounded-full bg-primary/10  text-[1.4rem]"
+                                >
+                                    {l.name}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Education */}
+                    <div className="p-6 rounded-2xl bg-background shadow-sm">
+                        <h3 className="text-[1.8rem] font-semibold mb-3 flex items-center gap-2 ">
+                            <GraduationCap size={18} /> Education
+                        </h3>
+                        <ul className="space-y-2">
+                            {profile.educations.map((edu, i) => (
+                                <li key={i} className="list-none ml-5 text-muted-foreground">
+                                    <div className="flex flex-col gap-[0.4rem]">
+                                        <p className="text-[1.6rem]"> {edu.name}</p>
+                                        <p className="text-[1.4rem]">{edu.object}</p>
+                                        <p className="text-[1.2rem]">
+                                            {dayjs(edu.from).format('YYYY')} -{' '}
+                                            {dayjs(edu.to).format('YYYY')}
+                                        </p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Availability */}
+                    <div className="p-6 rounded-2xl bg-background shadow-sm">
+                        <h3 className="text-[1.8rem] font-semibold mb-3 flex items-center gap-2 ">
+                            <Clock size={18} /> Availability
+                        </h3>
+                        {availabilityStrings.length > 0 ? (
+                            <ul className="space-y-1 text-[1.4rem] text-foreground flex flex-col gap-[1rem]">
+                                {availabilityStrings.map((a, i) => (
+                                    <li key={i}>
+                                        <Tag name={a} />
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-sm text-muted-foreground italic">
+                                No availability set
+                            </p>
+                        )}
+                    </div>
                 </div>
             </div>
         </BaseWrapper>
