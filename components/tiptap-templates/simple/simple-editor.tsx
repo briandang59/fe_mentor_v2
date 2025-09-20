@@ -56,9 +56,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { useCursorVisibility } from '@/hooks/use-cursor-visibility';
 
-// --- Components ---
-import { ThemeToggle } from '@/components/tiptap-templates/simple/theme-toggle';
-
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils';
 
@@ -162,6 +159,7 @@ export function SimpleEditor({ value, onChange }: Props) {
             <EditorContext.Provider value={{ editor }}>
                 <Toolbar
                     ref={toolbarRef}
+                    className="h-12 px-3 text-base"
                     style={isMobile ? { bottom: `calc(100% - ${height - rect.y}px)` } : {}}
                 >
                     {mobileView === 'main' ? (
@@ -181,7 +179,7 @@ export function SimpleEditor({ value, onChange }: Props) {
                 <EditorContent
                     editor={editor}
                     role="presentation"
-                    className="simple-editor-content"
+                    className="simple-editor-content text-base"
                 />
             </EditorContext.Provider>
         </div>
@@ -242,9 +240,6 @@ const MainToolbarContent = ({
         </ToolbarGroup>
         <Spacer />
         {isMobile && <ToolbarSeparator />}
-        <ToolbarGroup>
-            <ThemeToggle />
-        </ToolbarGroup>
     </>
 );
 
